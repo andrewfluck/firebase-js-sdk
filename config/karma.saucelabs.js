@@ -21,7 +21,6 @@ const karmaBase = require('./karma.base');
 
 /** Tests in these packages are excluded due to flakiness or long run time. */
 const excluded = [
-  'packages/database/*',
   'packages/firestore/*',
   'integration/firestore/*',
   'integration/messaging/*'
@@ -126,6 +125,15 @@ module.exports = function(config) {
     retryLimit: 0,
 
     // concurrency: 10,
+
+    client: {
+      mocha: {
+        timeout: 20000,
+        retries: 3,
+        grep: 'Crawler Support|local timestamp',
+        invert: true
+      }
+    },
 
     browserConsoleLogOptions: { terminal: false },
 
